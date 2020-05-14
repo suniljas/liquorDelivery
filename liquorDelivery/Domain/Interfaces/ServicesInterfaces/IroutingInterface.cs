@@ -6,6 +6,6 @@ namespace Domain.Interfaces.ServicesInterfaces
 {
     public interface IroutingInterface
     {
-
+        object routeAndFetchRepository(object apiRequest, string requestType);
     }
 }

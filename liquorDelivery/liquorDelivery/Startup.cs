@@ -2,12 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.Interfaces.RepositoryInterfaces;
+using Domain.Interfaces.ServicesInterfaces;
+using liquorDeliveryRepository;
+using liquorDeliverySevices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -26,6 +31,9 @@ namespace liquorDelivery
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.TryAddTransient<IliquorDeliveryRepoInterface, liquorDeliveryRepo > ();
+            services.TryAddTransient<IroutingInterface, routingSvc>();
+            services.TryAddTransient<IliquorDeliverySvcInterface, liquorDeliverySvc>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

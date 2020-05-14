@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\liquorDeliveryRepository\liquorDeliveryRepository.csproj" />
+    <ProjectReference Include="..\liquorDeliverySevices\liquorDeliverySevices.csproj" />
   </ItemGroup>
 
 
