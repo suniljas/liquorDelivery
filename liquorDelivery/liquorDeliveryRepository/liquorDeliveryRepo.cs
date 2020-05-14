@@ -50,7 +50,7 @@ namespace liquorDeliveryRepository
                     },
                 commandType: CommandType.StoredProcedure);
 
-                return Convert.ToInt32(authResult);
+                return authResult.Result;
             }
         }
 
