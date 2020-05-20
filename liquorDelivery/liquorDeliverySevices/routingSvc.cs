@@ -1,9 +1,6 @@
 ﻿using Domain.Interfaces.ServicesInterfaces;
 using Domain.Models.DomainModels;
 using Domain.Models.RequestModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace liquorDeliverySevices
 {
@@ -31,6 +28,13 @@ namespace liquorDeliverySevices
                 MobileNumber = apiRequest as mobileNumber;
                 return serviceResponse = _liquorDeliverySvc.getUserOtpSvc(MobileNumber);
             }
+            else if (requestType == "parentsCategoriesMenuRequest")
+            {
+                parentsCategoriesMenuRequest parentsCategoriesMenuRequest = new parentsCategoriesMenuRequest();
+                parentsCategoriesMenuRequest = apiRequest as parentsCategoriesMenuRequest;
+                return serviceResponse = _liquorDeliverySvc.getParentCategoriesMenuSvc(parentsCategoriesMenuRequest);
+            }
+            
 
             return serviceResponse;
         }

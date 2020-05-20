@@ -1,5 +1,6 @@
 ﻿using Domain.Models.DomainModels;
 using Domain.Models.RequestModels;
+using Domain.Models.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,8 @@ namespace Domain.Interfaces.RepositoryInterfaces
 {
    public interface IliquorDeliveryRepoInterface
     {
-        int getUserOtpAuthsRepo(userOtpAuthRequest userOtpAuthRequest);
-        int getUserOtpRepo(mobileNumber MobileNumber,int otp);
+        loginValidatorResponse getUserOtpAuthRepo(userOtpAuthRequest userOtpAuthRequest);
+        parentCategoriesMenuResponse getParentMenuRepo(parentsCategoriesMenuRequest parentsCategoriesMenuRequest);
+        userOtpResponse getUserOtpRepo(mobileNumber MobileNumber,int otp);
     }
 }

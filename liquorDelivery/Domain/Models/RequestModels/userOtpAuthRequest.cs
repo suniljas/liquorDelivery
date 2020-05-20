@@ -7,7 +7,7 @@ namespace Domain.Models.RequestModels
 {
     public class userOtpAuthRequest
     {
-        public long mobileNumber { get; set; }
+        public long mobileNo { get; set; }
         public string fcmid { get; set; }
         public string devicemodel { get; set; }
         public string osversion { get; set; }

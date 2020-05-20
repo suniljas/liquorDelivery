@@ -2,6 +2,7 @@
 using Domain.Interfaces.ServicesInterfaces;
 using Domain.Models.DomainModels;
 using Domain.Models.RequestModels;
+using Domain.Models.ResponseModels;
 using System;
 using System.IO;
 using System.Net;
@@ -17,12 +18,19 @@ namespace liquorDeliverySevices
             _liquorDeliveryRepo = liquorDeliveryRepo;
         }
 
-        public int getUserOtpAuthSvc(userOtpAuthRequest userOtpAuthRequest)
+        public parentCategoriesMenuResponse getParentCategoriesMenuSvc(parentsCategoriesMenuRequest userOtpAuthRequest)
         {
-            return _liquorDeliveryRepo.getUserOtpAuthsRepo(userOtpAuthRequest);
+            var result = _liquorDeliveryRepo.getParentMenuRepo(userOtpAuthRequest);
+            return result as parentCategoriesMenuResponse;
         }
 
-        public int getUserOtpSvc(mobileNumber MobileNumber)
+        public loginValidatorResponse getUserOtpAuthSvc(userOtpAuthRequest userOtpAuthRequest)
+        {
+           var result = _liquorDeliveryRepo.getUserOtpAuthRepo(userOtpAuthRequest);
+           return result as loginValidatorResponse;
+        }
+
+        public userOtpResponse getUserOtpSvc(mobileNumber MobileNumber)
         {
             int randomNumber;
             Random otpRandom = new Random();
@@ -37,7 +45,13 @@ namespace liquorDeliverySevices
             }
             else
             {
-                return 0;
+                var userotprsesponse = new userOtpResponse
+                {
+                    ResponseCode = "9",
+                    Message = "SMS gateway failiure"
+                };
+
+                return userotprsesponse;
             }
         }
 

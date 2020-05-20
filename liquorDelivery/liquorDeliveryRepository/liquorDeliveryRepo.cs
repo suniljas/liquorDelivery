@@ -4,10 +4,9 @@ using Domain.Models.DomainModels;
 using Domain.Models.RequestModels;
 using Domain.Models.ResponseModels;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Xml.Schema;
+using System.Linq;
 
 namespace liquorDeliveryRepository
 {
@@ -30,17 +29,18 @@ namespace liquorDeliveryRepository
 
             return conn;
         }
-        public int getUserOtpAuthsRepo(userOtpAuthRequest userOtpAuthRequest)
+
+        public loginValidatorResponse getUserOtpAuthRepo(userOtpAuthRequest userOtpAuthRequest)
         {
             string connectionString = getConnectionName("localDBConnection");
 
-            using (SqlConnection connection = new SqlConnection( connectionString ))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 var authResult = connection.QuerySingleOrDefault<userOtpAuthResponse>("[dbo].use_sp_logincall_validate",
                     new
                     {
-                        mobileNo = userOtpAuthRequest.mobileNumber,
+                        userOtpAuthRequest.mobileNo,
                         userOtpAuthRequest.fcmid,
                         userOtpAuthRequest.devicemodel,
                         userOtpAuthRequest.deviceid_1,
@@ -50,11 +50,77 @@ namespace liquorDeliveryRepository
                     },
                 commandType: CommandType.StoredProcedure);
 
-                return authResult.Result;
+                if(((authResult.Result == "0") || (authResult.Result == "8")))
+                {
+                    var loginvalidatorresponse = new loginValidatorResponse
+                    {
+                        ResponseCode = authResult.Result,
+                        SessionToken = null
+                    };
+
+                    return loginvalidatorresponse;
+                }
+                else
+                {
+                    var loginvalidatorresponse = new loginValidatorResponse
+                    {
+                        ResponseCode = "1",
+                        SessionToken = authResult.Result
+                    };
+
+                    return loginvalidatorresponse;
+                }
             }
         }
 
-        public int getUserOtpRepo(mobileNumber MobileNumber, int otp)
+        public parentCategoriesMenuResponse getParentMenuRepo(parentsCategoriesMenuRequest parentsCategoriesMenuRequest)
+        {
+
+            string connectionString = getConnectionName("localDBConnection");
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var parentCategoriesMenu = connection.QueryMultiple("[dbo].use_sp_get_category",
+                    new
+                    {
+                        parentsCategoriesMenuRequest.mobileNo,
+                        parentsCategoriesMenuRequest.sessionToken
+                    },
+                commandType: CommandType.StoredProcedure);
+
+                var result = parentCategoriesMenu.ReadSingleOrDefault<resultmodel> ();
+
+                if(result.Result == "1")
+                {
+                    var cartcnt = parentCategoriesMenu.Read<cartDetails>();
+                    var parentCat = parentCategoriesMenu.Read<parentCategory>().ToList();
+
+                    var cartcount = cartcnt.ToArray();
+
+                    var finResult = new parentCategoriesMenuResponse()
+                    {
+                        CartCount = cartcount[0].CartCount.ToString(),
+                        Category = parentCat.ToList(),
+                        ResponseCode = "1"
+                    };
+
+                    return finResult;
+                }
+                else
+                {
+                    return new parentCategoriesMenuResponse()
+                    {
+                        CartCount = null,
+                        Category = null,
+                        ResponseCode = "0"
+                    };
+                }
+
+            }
+        }
+
+        public userOtpResponse getUserOtpRepo(mobileNumber MobileNumber, int otp)
         {
             string connectionString = getConnectionName("localDBConnection");
 
@@ -70,7 +136,36 @@ namespace liquorDeliveryRepository
                     },
                 commandType: CommandType.StoredProcedure);
 
-                return authResult.Result;
+                if (authResult.Result == "0")
+                {
+                    var userotprsesponse = new userOtpResponse
+                    {
+                        ResponseCode = authResult.Result,
+                        Message = "OTP Failed to Sent"
+                    };
+
+                    return userotprsesponse;
+                }
+                else if((authResult.Result == "8"))
+                {
+                    var userotprsesponse = new userOtpResponse
+                    {
+                        ResponseCode = authResult.Result,
+                        Message = "DB Error"
+                    };
+
+                    return userotprsesponse;
+                }
+                else
+                {
+                    var userotprsesponse = new userOtpResponse
+                    {
+                        ResponseCode = authResult.Result,
+                        Message = "OTP Successfully Sent"
+                    };
+
+                    return userotprsesponse;
+                }
             }
         }
     }

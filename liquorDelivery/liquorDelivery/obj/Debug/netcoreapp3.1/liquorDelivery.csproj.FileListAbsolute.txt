@@ -107,3 +107,4 @@ C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Deb
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Debug\netcoreapp3.1\liquorDeliverySevices.dll
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Debug\netcoreapp3.1\liquorDeliveryRepository.pdb
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Debug\netcoreapp3.1\liquorDeliverySevices.pdb
+C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Debug\netcoreapp3.1\appsettings.Production.json

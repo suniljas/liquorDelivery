@@ -1,0 +1,12 @@
+C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDeliveryRepository\bin\Release\netcoreapp3.1\liquorDeliveryRepository.deps.json
+C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDeliveryRepository\bin\Release\netcoreapp3.1\liquorDeliveryRepository.dll
+C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDeliveryRepository\bin\Release\netcoreapp3.1\liquorDeliveryRepository.pdb
+C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDeliveryRepository\bin\Release\netcoreapp3.1\Domain.dll
+C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDeliveryRepository\bin\Release\netcoreapp3.1\Domain.pdb
+C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDeliveryRepository\obj\Release\netcoreapp3.1\liquorDeliveryRepository.csprojAssemblyReference.cache
+C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDeliveryRepository\obj\Release\netcoreapp3.1\liquorDeliveryRepository.csproj.CoreCompileInputs.cache
+C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDeliveryRepository\obj\Release\netcoreapp3.1\liquorDeliveryRepository.AssemblyInfoInputs.cache
+C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDeliveryRepository\obj\Release\netcoreapp3.1\liquorDeliveryRepository.AssemblyInfo.cs
+C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDeliveryRepository\obj\Release\netcoreapp3.1\liquorDeliveryRepository.csproj.CopyComplete
+C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDeliveryRepository\obj\Release\netcoreapp3.1\liquorDeliveryRepository.dll
+C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDeliveryRepository\obj\Release\netcoreapp3.1\liquorDeliveryRepository.pdb

@@ -6,6 +6,6 @@ namespace Domain.Models.ResponseModels
 {
     public class userOtpAuthResponse
     {
-        public int Result { get; set; }
+        public string Result { get; set; }
     }
 }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Domain.Interfaces.ServicesInterfaces;
+﻿using Domain.Interfaces.ServicesInterfaces;
 using Domain.Models.DomainModels;
 using Domain.Models.RequestModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace liquorDelivery.Controllers
@@ -40,6 +35,18 @@ namespace liquorDelivery.Controllers
         {
             string requestType = "userOtpReq";
             var obj = _routingService.routeAndFetchRepository(mobileNumber, requestType);
+            return obj;
+
+        }
+
+        [ProducesResponseType(typeof(int), 200)]
+        [ProducesResponseType(400)]
+        [HttpPost]
+        [Route("user/parentMenu")]
+        public object parentMenuReq(parentsCategoriesMenuRequest parentsCategoriesMenuRequest)
+        {
+            string requestType = "parentsCategoriesMenuRequest";
+            var obj = _routingService.routeAndFetchRepository(parentsCategoriesMenuRequest, requestType);
             return obj;
 
         }
