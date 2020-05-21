@@ -39,16 +39,5 @@ namespace liquorDelivery.Controllers
 
         }
 
-        [ProducesResponseType(typeof(int), 200)]
-        [ProducesResponseType(400)]
-        [HttpPost]
-        [Route("user/parentMenu")]
-        public object parentMenuReq(parentsCategoriesMenuRequest parentsCategoriesMenuRequest)
-        {
-            string requestType = "parentsCategoriesMenuRequest";
-            var obj = _routingService.routeAndFetchRepository(parentsCategoriesMenuRequest, requestType);
-            return obj;
-
-        }
     }
 }

@@ -120,6 +120,49 @@ namespace liquorDeliveryRepository
             }
         }
 
+        public childSubCategoriesMenuResponse getChildMenuRepo(childSubCategoriesMenuRequest childSubCategoriesMenuRequest)
+        {
+
+            string connectionString = getConnectionName("localDBConnection");
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var subCategoriesMenu = connection.QueryMultiple("[dbo].use_sp_get_subcategory",
+                    new
+                    {
+                        childSubCategoriesMenuRequest.mobileNo,
+                        childSubCategoriesMenuRequest.sessionToken,
+                        childSubCategoriesMenuRequest.categoryid
+                    },
+                commandType: CommandType.StoredProcedure);
+
+                var result = subCategoriesMenu.ReadSingleOrDefault<resultmodel>();
+
+                if (result.Result == "1")
+                {
+                    var childCat = subCategoriesMenu.Read<childCategory>().ToList();
+
+                    var finResult = new childSubCategoriesMenuResponse()
+                    {
+                        SubCategory = childCat.ToList(),
+                        ResponseCode = "1"
+                    };
+
+                    return finResult;
+                }
+                else
+                {
+                    return new childSubCategoriesMenuResponse()
+                    {
+                        SubCategory = null,
+                        ResponseCode = "0"
+                    };
+                }
+
+            }
+        }
+
         public userOtpResponse getUserOtpRepo(mobileNumber MobileNumber, int otp)
         {
             string connectionString = getConnectionName("localDBConnection");
@@ -166,6 +209,93 @@ namespace liquorDeliveryRepository
 
                     return userotprsesponse;
                 }
+            }
+        }
+
+        public addCartResponse getAddCartRepo(addCartRequest addCartRequest)
+        {
+            string connectionString = getConnectionName("localDBConnection");
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var addcart = connection.QueryMultiple("[dbo].use_sp_add_cart",
+                    new
+                    {
+                        addCartRequest.mobileNo,
+                        addCartRequest.sessionToken,
+                        addCartRequest.AddORDelete,
+                        addCartRequest.Id,
+                        addCartRequest.Price,
+                        addCartRequest.ProductName,
+                        addCartRequest.Qty
+                    },
+                commandType: CommandType.StoredProcedure);
+
+                var result = addcart.ReadSingleOrDefault<resultmodel>();
+
+                if (result.Result == "1")
+                {
+                    var addCartInfo = addcart.Read<CartInfo>().ToList();
+
+                    var finResult = new addCartResponse()
+                    {
+                        CartDetails = addCartInfo.ToList(),
+                        ResponseCode = "1"
+                    };
+
+                    return finResult;
+                }
+                else
+                {
+                    return new addCartResponse()
+                    {
+                        CartDetails = null,
+                        ResponseCode = "0"
+                    };
+                }
+
+            }
+        }
+
+        public loadCartResponse getLoadCartRepo(loadCartRequest loadCartRequest)
+        {
+            string connectionString = getConnectionName("localDBConnection");
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var loadCart = connection.QueryMultiple("[dbo].use_sp_load_cart",
+                    new
+                    {
+                        loadCartRequest.mobileNo,
+                        loadCartRequest.sessionToken
+                    },
+                commandType: CommandType.StoredProcedure);
+
+                var result = loadCart.ReadSingleOrDefault<resultmodel>();
+
+                if (result.Result == "1")
+                {
+                    var loadCartInfo = loadCart.Read<CartInfo>().ToList();
+
+                    var finResult = new loadCartResponse()
+                    {
+                        CartDetails = loadCartInfo.ToList(),
+                        ResponseCode = "1"
+                    };
+
+                    return finResult;
+                }
+                else
+                {
+                    return new loadCartResponse()
+                    {
+                        CartDetails = null,
+                        ResponseCode = "0"
+                    };
+                }
+
             }
         }
     }

@@ -34,7 +34,25 @@ namespace liquorDeliverySevices
                 parentsCategoriesMenuRequest = apiRequest as parentsCategoriesMenuRequest;
                 return serviceResponse = _liquorDeliverySvc.getParentCategoriesMenuSvc(parentsCategoriesMenuRequest);
             }
-            
+            else if (requestType == "childSubCategoriesMenuRequest")
+            {
+                childSubCategoriesMenuRequest childSubCategoriesMenuRequest = new childSubCategoriesMenuRequest();
+                childSubCategoriesMenuRequest = apiRequest as childSubCategoriesMenuRequest;
+                return serviceResponse = _liquorDeliverySvc.getChildCategoriesMenuSvc(childSubCategoriesMenuRequest);
+            }
+            else if (requestType == "addCartRequest")
+            {
+                addCartRequest addCartRequest = new addCartRequest();
+                addCartRequest = apiRequest as addCartRequest;
+                return serviceResponse = _liquorDeliverySvc.getAddCartSvc(addCartRequest);
+            }
+            else if (requestType == "loadCartRequest")
+            {
+                loadCartRequest loadCartRequest = new loadCartRequest();
+                loadCartRequest = apiRequest as loadCartRequest;
+                return serviceResponse = _liquorDeliverySvc.getLoadCartSvc(loadCartRequest);
+            }
+
 
             return serviceResponse;
         }

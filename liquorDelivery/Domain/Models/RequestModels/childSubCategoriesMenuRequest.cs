@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Domain.Models.RequestModels
+{
+    public class childSubCategoriesMenuRequest
+    {
+        public int categoryid { get; set; }
+        public long mobileNo { get; set; }
+        public string sessionToken { get; set; }
+    }
+}

@@ -11,6 +11,9 @@ namespace Domain.Interfaces.RepositoryInterfaces
     {
         loginValidatorResponse getUserOtpAuthRepo(userOtpAuthRequest userOtpAuthRequest);
         parentCategoriesMenuResponse getParentMenuRepo(parentsCategoriesMenuRequest parentsCategoriesMenuRequest);
+        childSubCategoriesMenuResponse getChildMenuRepo(childSubCategoriesMenuRequest childSubCategoriesMenuRequest);
         userOtpResponse getUserOtpRepo(mobileNumber MobileNumber,int otp);
+        addCartResponse getAddCartRepo(addCartRequest addCartRequest);
+        loadCartResponse getLoadCartRepo(loadCartRequest loadCartRequest);
     }
 }

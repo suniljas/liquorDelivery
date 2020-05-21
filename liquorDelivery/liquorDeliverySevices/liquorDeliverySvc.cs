@@ -18,10 +18,16 @@ namespace liquorDeliverySevices
             _liquorDeliveryRepo = liquorDeliveryRepo;
         }
 
-        public parentCategoriesMenuResponse getParentCategoriesMenuSvc(parentsCategoriesMenuRequest userOtpAuthRequest)
+        public parentCategoriesMenuResponse getParentCategoriesMenuSvc(parentsCategoriesMenuRequest parentsCategoriesMenuRequest)
         {
-            var result = _liquorDeliveryRepo.getParentMenuRepo(userOtpAuthRequest);
+            var result = _liquorDeliveryRepo.getParentMenuRepo(parentsCategoriesMenuRequest);
             return result as parentCategoriesMenuResponse;
+        }
+
+        public childSubCategoriesMenuResponse getChildCategoriesMenuSvc(childSubCategoriesMenuRequest childSubCategoriesMenuRequest)
+        {
+            var result = _liquorDeliveryRepo.getChildMenuRepo(childSubCategoriesMenuRequest);
+            return result as childSubCategoriesMenuResponse;
         }
 
         public loginValidatorResponse getUserOtpAuthSvc(userOtpAuthRequest userOtpAuthRequest)
@@ -57,7 +63,7 @@ namespace liquorDeliverySevices
 
         private string otpSendOtp(int randomNumber, long phoneNumber)
         {
-            String WFLocation = ("http://120.138.10.196/API/pushsms.aspx?loginID=ftauto&password=ftauto&mobile="+ phoneNumber + "&text=" + randomNumber +"&senderid=SEDIND&route_id=4&Unicode=0");
+            String WFLocation = ("http://120.138.10.196/API/pushsms.aspx?loginID=ftauto&password=ftauto&mobile="+ phoneNumber + "&text=" + randomNumber + " is the OTP for login , do not share this with anyone." + "&senderid=SEDIND&route_id=4&Unicode=0");
 
 
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(WFLocation);
@@ -69,6 +75,18 @@ namespace liquorDeliverySevices
             sr.Close();
 
             return Status_Code;
+        }
+
+        public addCartResponse getAddCartSvc(addCartRequest addCartRequest)
+        {
+            var result = _liquorDeliveryRepo.getAddCartRepo(addCartRequest);
+            return result as addCartResponse;
+        }
+
+        public loadCartResponse getLoadCartSvc(loadCartRequest loadCartRequest)
+        {
+            var result = _liquorDeliveryRepo.getLoadCartRepo(loadCartRequest);
+            return result as loadCartResponse;
         }
     }
 }

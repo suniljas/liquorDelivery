@@ -11,7 +11,10 @@ namespace Domain.Interfaces.ServicesInterfaces
     {
         loginValidatorResponse getUserOtpAuthSvc(userOtpAuthRequest userOtpAuthRequest);
         userOtpResponse getUserOtpSvc(mobileNumber MobileNumber);
-        parentCategoriesMenuResponse getParentCategoriesMenuSvc(parentsCategoriesMenuRequest userOtpAuthRequest);
-        
+        parentCategoriesMenuResponse getParentCategoriesMenuSvc(parentsCategoriesMenuRequest parentsCategoriesMenuRequest);
+        childSubCategoriesMenuResponse getChildCategoriesMenuSvc(childSubCategoriesMenuRequest childSubCategoriesMenuRequest);
+        addCartResponse getAddCartSvc(addCartRequest addCartRequest);
+        loadCartResponse getLoadCartSvc(loadCartRequest loadCartRequest);
+
     }
 }
