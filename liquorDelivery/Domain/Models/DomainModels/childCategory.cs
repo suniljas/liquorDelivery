@@ -8,6 +8,8 @@ namespace Domain.Models.DomainModels
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public string ImagePath { get; set; }
+        public string Path { get; set; }
+        public float Price { get; set; }
+        public string Qty { get; set; }
     }
 }
