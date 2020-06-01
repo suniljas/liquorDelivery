@@ -142,10 +142,12 @@ namespace liquorDeliveryRepository
                 if (result.Result == "1")
                 {
                     var childCat = subCategoriesMenu.Read<childCategory>().ToList();
+                    var qty = subCategoriesMenu.Read<quantityDetails>().ToList();
 
                     var finResult = new childSubCategoriesMenuResponse()
                     {
                         SubCategory = childCat.ToList(),
+                        Qty = qty.ToList(),
                         ResponseCode = "1"
                     };
 

@@ -9,5 +9,6 @@ namespace Domain.Models.ResponseModels
     {
         public string ResponseCode { get; set; }
         public List<childCategory> SubCategory { get; set; }
+        public List<quantityDetails> Qty { get; set; }
     }
 }
