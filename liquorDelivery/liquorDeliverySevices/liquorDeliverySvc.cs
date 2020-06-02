@@ -88,5 +88,11 @@ namespace liquorDeliverySevices
             var result = _liquorDeliveryRepo.getLoadCartRepo(loadCartRequest);
             return result as loadCartResponse;
         }
+
+        public customerNotificationResponse getCustNotificationSvc(notificationRequest notificationRequest)
+        {
+            var result = _liquorDeliveryRepo.getCustomerNotificationRepo(notificationRequest);
+            return result as customerNotificationResponse;
+        }
     }
 }

@@ -4,6 +4,7 @@ using Domain.Models.DomainModels;
 using Domain.Models.RequestModels;
 using Domain.Models.ResponseModels;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -50,7 +51,7 @@ namespace liquorDeliveryRepository
                     },
                 commandType: CommandType.StoredProcedure);
 
-                if(((authResult.Result == "0") || (authResult.Result == "8")))
+                if (((authResult.Result == "0") || (authResult.Result == "8")))
                 {
                     var loginvalidatorresponse = new loginValidatorResponse
                     {
@@ -89,9 +90,9 @@ namespace liquorDeliveryRepository
                     },
                 commandType: CommandType.StoredProcedure);
 
-                var result = parentCategoriesMenu.ReadSingleOrDefault<resultmodel> ();
+                var result = parentCategoriesMenu.ReadSingleOrDefault<resultmodel>();
 
-                if(result.Result == "1")
+                if (result.Result == "1")
                 {
                     var cartcnt = parentCategoriesMenu.Read<cartDetails>();
                     var parentCat = parentCategoriesMenu.Read<parentCategory>().ToList();
@@ -141,15 +142,22 @@ namespace liquorDeliveryRepository
 
                 if (result.Result == "1")
                 {
-                    var childCat = subCategoriesMenu.Read<childCategory>().ToList();
+                    var childCat = subCategoriesMenu.Read<childMenuCategory>().ToList();
                     var qty = subCategoriesMenu.Read<quantityDetails>().ToList();
+
+                    var finResult2 = new childCategory()
+                    {
+                        SubCategoryList = childCat.ToList(),
+                        Qty = qty.ToList()
+                    };
+
 
                     var finResult = new childSubCategoriesMenuResponse()
                     {
-                        SubCategory = childCat.ToList(),
-                        Qty = qty.ToList(),
-                        ResponseCode = "1"
+                        SubCategory = finResult2,
+                        ResponseCode = "1",
                     };
+
 
                     return finResult;
                 }
@@ -191,7 +199,7 @@ namespace liquorDeliveryRepository
 
                     return userotprsesponse;
                 }
-                else if((authResult.Result == "8"))
+                else if ((authResult.Result == "8"))
                 {
                     var userotprsesponse = new userOtpResponse
                     {
@@ -294,6 +302,74 @@ namespace liquorDeliveryRepository
                     return new loadCartResponse()
                     {
                         CartDetails = null,
+                        ResponseCode = "0"
+                    };
+                }
+
+            }
+        }
+
+        public customerNotificationResponse getCustomerNotificationRepo(notificationRequest notificationRequest)
+        {
+            string connectionString = getConnectionName("localDBConnection");
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var customerNotification = connection.QueryMultiple("[dbo].use_sp_cust_notifications",
+                    new
+                    {
+                        notificationRequest.mobileNo,
+                        notificationRequest.sessionToken
+                    },
+                commandType: CommandType.StoredProcedure);
+
+                var result = customerNotification.ReadSingleOrDefault<resultmodel>();
+
+                if (result != null)
+                {
+                    if (result.Result == "1")
+                    {
+                        var notification = customerNotification.Read<notificationList>();
+
+                        var finResult = new customerNotificationResponse()
+                        {
+                            Notifications = notification.ToList(),
+                            ResponseCode = "1"
+                        };
+
+                        return finResult;
+                    }
+                    else if (result.Result == "8")
+                    {
+                        return new customerNotificationResponse()
+                        {
+                            Notifications = null,
+                            ResponseCode = "8"
+                        };
+                    }
+                    else if (result.Result == "0")
+                    {
+                        return new customerNotificationResponse()
+                        {
+                            Notifications = null,
+                            ResponseCode = "0"
+                        };
+                    }
+                    else
+                    {
+                        return new customerNotificationResponse()
+                        {
+                            Notifications = null,
+                            ResponseCode = "0"
+                        };
+                    }
+                }
+                else
+                {
+                    return new customerNotificationResponse()
+                    {
+                        Notifications = null,
                         ResponseCode = "0"
                     };
                 }

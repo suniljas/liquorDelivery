@@ -15,5 +15,6 @@ namespace Domain.Interfaces.RepositoryInterfaces
         userOtpResponse getUserOtpRepo(mobileNumber MobileNumber,int otp);
         addCartResponse getAddCartRepo(addCartRequest addCartRequest);
         loadCartResponse getLoadCartRepo(loadCartRequest loadCartRequest);
+        customerNotificationResponse getCustomerNotificationRepo(notificationRequest notificationRequest);
     }
 }

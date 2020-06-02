@@ -52,6 +52,12 @@ namespace liquorDeliverySevices
                 loadCartRequest = apiRequest as loadCartRequest;
                 return serviceResponse = _liquorDeliverySvc.getLoadCartSvc(loadCartRequest);
             }
+            else if (requestType == "notificationRequest")
+            {
+                notificationRequest notificationRequest = new notificationRequest();
+                notificationRequest = apiRequest as notificationRequest;
+                return serviceResponse = _liquorDeliverySvc.getCustNotificationSvc(notificationRequest);
+            }
 
 
             return serviceResponse;

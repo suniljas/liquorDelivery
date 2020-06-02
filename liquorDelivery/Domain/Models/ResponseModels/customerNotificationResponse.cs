@@ -5,10 +5,9 @@ using System.Text;
 
 namespace Domain.Models.ResponseModels
 {
-    public class childSubCategoriesMenuResponse
+    public class customerNotificationResponse
     {
+        public List<notificationList> Notifications { get; set; }
         public string ResponseCode { get; set; }
-        public childCategory SubCategory { get; set; }
-        
     }
 }

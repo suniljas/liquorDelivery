@@ -15,6 +15,6 @@ namespace Domain.Interfaces.ServicesInterfaces
         childSubCategoriesMenuResponse getChildCategoriesMenuSvc(childSubCategoriesMenuRequest childSubCategoriesMenuRequest);
         addCartResponse getAddCartSvc(addCartRequest addCartRequest);
         loadCartResponse getLoadCartSvc(loadCartRequest loadCartRequest);
-
+        customerNotificationResponse getCustNotificationSvc(notificationRequest notificationRequest);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Models.ResponseModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,8 +7,7 @@ namespace Domain.Models.DomainModels
 {
     public class childCategory
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Path { get; set; }
+        public List<childMenuCategory> SubCategoryList { get; set; }
+        public List<quantityDetails> Qty { get; set; }
     }
 }
