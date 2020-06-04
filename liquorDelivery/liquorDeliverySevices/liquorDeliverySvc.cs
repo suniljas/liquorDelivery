@@ -63,7 +63,7 @@ namespace liquorDeliverySevices
 
         private string otpSendOtp(int randomNumber, long phoneNumber)
         {
-            String WFLocation = ("http://120.138.10.196/API/pushsms.aspx?loginID=ftauto&password=ftauto&mobile="+ phoneNumber + "&text=" + randomNumber + " is the OTP for login , do not share this with anyone." + "&senderid=SEDIND&route_id=4&Unicode=0");
+            String WFLocation = ("https://hpapi.dial4sms.com/SendSMS/sendmsg.php?uname=ftauto&pass=Ftauto@1&send=sedind&dest=" + phoneNumber + "&msg=" + randomNumber + " is the OTP for login , do not share this with anyone.");
 
 
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(WFLocation);

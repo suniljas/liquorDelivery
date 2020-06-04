@@ -8,7 +8,7 @@ namespace Domain.Models.ResponseModels
     public class childSubCategoriesMenuResponse
     {
         public string ResponseCode { get; set; }
-        public childCategory SubCategory { get; set; }
-        
+        public List<childMenuCategory> SubCategoryList { get; set; }
+
     }
 }

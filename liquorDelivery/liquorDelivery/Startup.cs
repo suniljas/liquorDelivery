@@ -34,6 +34,7 @@ namespace liquorDelivery
             services.TryAddTransient<IliquorDeliveryRepoInterface, liquorDeliveryRepo > ();
             services.TryAddTransient<IroutingInterface, routingSvc>();
             services.TryAddTransient<IliquorDeliverySvcInterface, liquorDeliverySvc>();
+            services.TryAddTransient<ImapperInterface, mapperSvc>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Domain.Interfaces.RepositoryInterfaces;
+using Domain.Interfaces.ServicesInterfaces;
 using Domain.Models.DomainModels;
 using Domain.Models.RequestModels;
 using Domain.Models.ResponseModels;
@@ -14,9 +15,12 @@ namespace liquorDeliveryRepository
     public class liquorDeliveryRepo : IliquorDeliveryRepoInterface
     {
         private readonly IConfiguration _configuration;
-        public liquorDeliveryRepo(IConfiguration configuration)
+        private readonly ImapperInterface _mapper;
+        public liquorDeliveryRepo(IConfiguration configuration , ImapperInterface mapper)
         {
             _configuration = configuration;
+            _mapper = mapper;
+
         }
 
         private string getConnectionName(string connName)
@@ -142,19 +146,15 @@ namespace liquorDeliveryRepository
 
                 if (result.Result == "1")
                 {
-                    var childCat = subCategoriesMenu.Read<childMenuCategory>().ToList();
+                    var childCat = subCategoriesMenu.Read<childList>().ToList();
                     var qty = subCategoriesMenu.Read<quantityDetails>().ToList();
 
-                    var finResult2 = new childCategory()
-                    {
-                        SubCategoryList = childCat.ToList(),
-                        Qty = qty.ToList()
-                    };
+                    List<childMenuCategory> mapperListResponse = _mapper.MapChildAndQuantity(childCat.ToList(), qty.ToList());
 
 
                     var finResult = new childSubCategoriesMenuResponse()
                     {
-                        SubCategory = finResult2,
+                        SubCategoryList = mapperListResponse,
                         ResponseCode = "1",
                     };
 
@@ -165,7 +165,7 @@ namespace liquorDeliveryRepository
                 {
                     return new childSubCategoriesMenuResponse()
                     {
-                        SubCategory = null,
+                        SubCategoryList = null,
                         ResponseCode = "0"
                     };
                 }
