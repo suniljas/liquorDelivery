@@ -11,20 +11,25 @@ namespace liquorDeliverySevices
     {
         public List<childMenuCategory> MapChildAndQuantity(List<childList> childLisItem, List<quantityDetails> Qty)
         {
-            childMenuCategory childMenuCategory = new childMenuCategory();
             List<childMenuCategory> childMenuCategorylst = new List<childMenuCategory>();
 
             foreach(var items in childLisItem)
             {
+                childMenuCategory childMenuCategory = new childMenuCategory();
+
                 childMenuCategory.Id = items.Id;
                 childMenuCategory.Name = items.Name;
                 childMenuCategory.Path = items.Path;
-                foreach (var Qtyitems in Qty)
+                foreach (quantityDetails Qtyitems in Qty)
                 {
                     if (Qtyitems.Id == items.Id)
                     {
-                        childMenuCategory.Qty = Qty;
-                        break;
+                        if (childMenuCategory.Qty == null)
+                        {
+                            childMenuCategory.Qty = new List<quantityDetails>();
+                        }
+
+                        childMenuCategory.Qty.Add(Qtyitems);
                     }
                 }
 
