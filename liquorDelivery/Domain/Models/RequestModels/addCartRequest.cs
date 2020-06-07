@@ -10,7 +10,8 @@ namespace Domain.Models.RequestModels
         public int Id { get; set; }
         public string ProductName { get; set; }
         public float Price { get; set; }
-        public int Qty { get; set; }
+        public string Qty { get; set; }
+        public int CartQty { get; set; }        
         public string AddORDelete { get; set; }
         public string sessionToken { get; set; }
     }

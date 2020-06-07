@@ -1,3 +1,6 @@
+C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\NuGet.Frameworks.dll
+C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\appsettings.Development.json
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\appsettings.json
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\appsettings.Production.json
@@ -26,7 +29,6 @@ C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Rel
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\Newtonsoft.Json.dll
-C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\NuGet.Frameworks.dll
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\System.Composition.AttributedModel.dll
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\System.Composition.Convention.dll
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\System.Composition.Hosting.dll
@@ -52,9 +54,7 @@ C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Rel
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\it\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
-C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
-C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\Sunil\source\repos\liquorDelivery\liquorDelivery\liquorDelivery\bin\Release\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll

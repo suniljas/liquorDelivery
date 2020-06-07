@@ -16,5 +16,9 @@ namespace Domain.Interfaces.ServicesInterfaces
         addCartResponse getAddCartSvc(addCartRequest addCartRequest);
         loadCartResponse getLoadCartSvc(loadCartRequest loadCartRequest);
         customerNotificationResponse getCustNotificationSvc(notificationRequest notificationRequest);
+        responseCodeResponse getCustomerProfileInsertSvc(customerProfileRequest customerProfileRequest);
+        customerProfileLoadResponse getCustomerProfileLoadSvc(customerProfileLoadRequest customerProfileLoadRequest);
+        responseCodeResponse getUpdateNotificationSvc(notificationUpdateRequest notificationUpdateRequest);
+        responseCodeResponse getCustomerBookingSvc(bookingRequest bookingRequest);
     }
 }

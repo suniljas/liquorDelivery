@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Domain.Models.ResponseModels
 {
-    public class loadCartResponse
+    public class customerProfileLoadResponse
     {
         public string ResponseCode { get; set; }
-        public string CartCount { get; set; }
-        public List<CartInfo> CartDetails { get; set; }
+        public profileModel profile { get; set; }
+        public List<addressModel> address { get; set; }
     }
 }

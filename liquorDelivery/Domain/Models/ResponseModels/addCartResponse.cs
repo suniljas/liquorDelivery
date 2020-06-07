@@ -6,6 +6,7 @@ namespace Domain.Models.ResponseModels
     public class addCartResponse
     {
         public string ResponseCode { get; set; }
+        public string CartCount { get; set; }
         public List<CartInfo> CartDetails { get; set; }
     }
 }

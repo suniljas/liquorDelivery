@@ -146,8 +146,10 @@ namespace liquorDeliveryRepository
 
                 if (result.Result == "1")
                 {
-                    var childCat = subCategoriesMenu.Read<childList>().ToList();
+                    var cartCount = subCategoriesMenu.ReadSingle<cartCountValue>();
+                    var childCat = subCategoriesMenu.Read<childList>().ToList();                    
                     var qty = subCategoriesMenu.Read<quantityDetails>().ToList();
+                   
 
                     List<childMenuCategory> mapperListResponse = _mapper.MapChildAndQuantity(childCat.ToList(), qty.ToList());
 
@@ -156,6 +158,7 @@ namespace liquorDeliveryRepository
                     {
                         SubCategoryList = mapperListResponse,
                         ResponseCode = "1",
+                        cartCount = cartCount.CartCount
                     };
 
 
@@ -166,7 +169,8 @@ namespace liquorDeliveryRepository
                     return new childSubCategoriesMenuResponse()
                     {
                         SubCategoryList = null,
-                        ResponseCode = "0"
+                        ResponseCode = "0",
+                        cartCount = null
                     };
                 }
 
@@ -238,7 +242,8 @@ namespace liquorDeliveryRepository
                         addCartRequest.Id,
                         addCartRequest.Price,
                         addCartRequest.ProductName,
-                        addCartRequest.Qty
+                        addCartRequest.Qty,
+                        addCartRequest.CartQty
                     },
                 commandType: CommandType.StoredProcedure);
 
@@ -246,12 +251,14 @@ namespace liquorDeliveryRepository
 
                 if (result.Result == "1")
                 {
+                    var cartCount = addcart.ReadSingle<cartCountValue>();
                     var addCartInfo = addcart.Read<CartInfo>().ToList();
 
                     var finResult = new addCartResponse()
                     {
                         CartDetails = addCartInfo.ToList(),
-                        ResponseCode = "1"
+                        ResponseCode = "1",
+                        CartCount = cartCount.CartCount
                     };
 
                     return finResult;
@@ -261,7 +268,8 @@ namespace liquorDeliveryRepository
                     return new addCartResponse()
                     {
                         CartDetails = null,
-                        ResponseCode = "0"
+                        ResponseCode = "0",
+                        CartCount = null
                     };
                 }
 
@@ -284,25 +292,40 @@ namespace liquorDeliveryRepository
                 commandType: CommandType.StoredProcedure);
 
                 var result = loadCart.ReadSingleOrDefault<resultmodel>();
-
-                if (result.Result == "1")
+                if (result != null)
                 {
-                    var loadCartInfo = loadCart.Read<CartInfo>().ToList();
 
-                    var finResult = new loadCartResponse()
+                    if (result.Result == "1")
                     {
-                        CartDetails = loadCartInfo.ToList(),
-                        ResponseCode = "1"
-                    };
+                        var cartCount = loadCart.ReadSingle<cartCountValue>();
+                        var loadCartInfo = loadCart.Read<CartInfo>().ToList();                        
 
-                    return finResult;
+                        var finResult = new loadCartResponse()
+                        {
+                            CartDetails = loadCartInfo.ToList(),
+                            ResponseCode = "1",
+                            CartCount = cartCount.CartCount
+                        };
+
+                        return finResult;
+                    }
+                    else
+                    {
+                        return new loadCartResponse()
+                        {
+                            CartDetails = null,
+                            ResponseCode = "0",
+                            CartCount = null
+                        };
+                    }
                 }
                 else
                 {
                     return new loadCartResponse()
                     {
                         CartDetails = null,
-                        ResponseCode = "0"
+                        ResponseCode = "0",
+                        CartCount = null
                     };
                 }
 
@@ -375,6 +398,26 @@ namespace liquorDeliveryRepository
                 }
 
             }
+        }
+
+        public responseCodeResponse getCustomerProfileInsertRepo(customerProfileRequest customerProfileRequest)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public customerProfileLoadResponse getCustomerProfileLoadRepo(customerProfileLoadRequest customerProfileLoadRequest)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public responseCodeResponse getUpdateNotificationRepo(notificationUpdateRequest notificationUpdateRequest)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public responseCodeResponse getCustomerBookingRepo(bookingRequest bookingRequest)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

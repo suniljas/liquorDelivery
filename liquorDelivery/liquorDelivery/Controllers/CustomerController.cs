@@ -30,6 +30,50 @@ namespace liquorDelivery.Controllers
             return obj;
 
         }
+        [ProducesResponseType(typeof(int), 200)]
+        [ProducesResponseType(400)]
+        [HttpPost]
+        [Route("user/customerprofile")]
+        public object customerProfileInsert(customerProfileRequest customerProfileRequest)
+        {
+            string requestType = "customerProfileRequest";
+            var obj = _routingService.routeAndFetchRepository(customerProfileRequest, requestType);
+            return obj;
+
+        }
+        [ProducesResponseType(typeof(int), 200)]
+        [ProducesResponseType(400)]
+        [HttpPost]
+        [Route("user/customerprofileload")]
+        public object CustomerProfileLoad(customerProfileLoadRequest customerProfileLoadRequest)
+        {
+            string requestType = "customerProfileLoadRequest";
+            var obj = _routingService.routeAndFetchRepository(customerProfileLoadRequest, requestType);
+            return obj;
+
+        }
+        [ProducesResponseType(typeof(int), 200)]
+        [ProducesResponseType(400)]
+        [HttpPost]
+        [Route("user/notficationupdate")]
+        public object updateNotification(notificationUpdateRequest notificationUpdateRequestcs)
+        {
+            string requestType = "notificationUpdateRequestcs";
+            var obj = _routingService.routeAndFetchRepository(notificationUpdateRequestcs, requestType);
+            return obj;
+
+        }
+        [ProducesResponseType(typeof(int), 200)]
+        [ProducesResponseType(400)]
+        [HttpPost]
+        [Route("user/booking")]
+        public object customerBooking(bookingRequest bookingRequest)
+        {
+            string requestType = "bookingRequest";
+            var obj = _routingService.routeAndFetchRepository(bookingRequest, requestType);
+            return obj;
+
+        }
 
     }
 }

@@ -10,6 +10,7 @@ namespace Domain.Models.DomainModels
         public string Name { get; set; }
         public float Price { get; set; }
         public string Path { get; set; }
-        public int Qty { get; set; }
+        public string Qty { get; set; }
+        public int CartQty { get; set; }        
     }
 }
