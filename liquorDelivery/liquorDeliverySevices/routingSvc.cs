@@ -58,6 +58,30 @@ namespace liquorDeliverySevices
                 notificationRequest = apiRequest as notificationRequest;
                 return serviceResponse = _liquorDeliverySvc.getCustNotificationSvc(notificationRequest);
             }
+            else if (requestType == "customerProfileRequest")
+            {
+                customerProfileRequest customerProfileRequest = new customerProfileRequest();
+                customerProfileRequest = apiRequest as customerProfileRequest;
+                return serviceResponse = _liquorDeliverySvc.getCustomerProfileInsertSvc(customerProfileRequest);
+            }
+            else if (requestType == "customerProfileLoadRequest")
+            {
+                customerProfileLoadRequest customerProfileLoadRequest = new customerProfileLoadRequest();
+                customerProfileLoadRequest = apiRequest as customerProfileLoadRequest;
+                return serviceResponse = _liquorDeliverySvc.getCustomerProfileLoadSvc(customerProfileLoadRequest);
+            }
+            else if (requestType == "notificationUpdateRequestcs")
+            {
+                notificationUpdateRequest notificationUpdateRequest = new notificationUpdateRequest();
+                notificationUpdateRequest = apiRequest as notificationUpdateRequest;
+                return serviceResponse = _liquorDeliverySvc.getUpdateNotificationSvc(notificationUpdateRequest);
+            }
+            else if (requestType == "bookingRequest")
+            {
+                bookingRequest bookingRequest = new bookingRequest();
+                bookingRequest = apiRequest as bookingRequest;
+                return serviceResponse = _liquorDeliverySvc.getCustomerBookingSvc(bookingRequest);
+            }
 
 
             return serviceResponse;

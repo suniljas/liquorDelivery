@@ -19,6 +19,6 @@ namespace Domain.Interfaces.RepositoryInterfaces
         responseCodeResponse getCustomerProfileInsertRepo(customerProfileRequest customerProfileRequest);
         customerProfileLoadResponse getCustomerProfileLoadRepo(customerProfileLoadRequest customerProfileLoadRequest);
         responseCodeResponse getUpdateNotificationRepo(notificationUpdateRequest notificationUpdateRequest);
-        responseCodeResponse getCustomerBookingRepo(bookingRequest bookingRequest);
+        customerBookingResponse getCustomerBookingRepo(bookingRequest bookingRequest);
     }
 }

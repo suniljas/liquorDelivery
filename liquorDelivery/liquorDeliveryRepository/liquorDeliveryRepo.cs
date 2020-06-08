@@ -402,22 +402,268 @@ namespace liquorDeliveryRepository
 
         public responseCodeResponse getCustomerProfileInsertRepo(customerProfileRequest customerProfileRequest)
         {
-            throw new System.NotImplementedException();
+            string connectionString = getConnectionName("localDBConnection");
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var result = connection.QuerySingleOrDefault("[dbo].use_sp_cust_profile",
+                    new
+                    {
+                        customerProfileRequest.mobileNo,
+                        customerProfileRequest.title,
+                        customerProfileRequest.name,
+                        customerProfileRequest.addline1,
+                        customerProfileRequest.addline2,
+                        customerProfileRequest.AddorUpdate,
+                        customerProfileRequest.addtype,
+                        customerProfileRequest.city,
+                        customerProfileRequest.email,
+                        customerProfileRequest.pincode,
+                        customerProfileRequest.sessionToken,
+                        customerProfileRequest.state
+                    },
+                commandType: CommandType.StoredProcedure);
+
+                if (result != null)
+                {
+
+                    if (result.Result == "1")
+                    {
+
+                        return new responseCodeResponse()
+                        {
+                            ResponseCode = "1"
+                        };
+                    }
+                    else if (result.Result == "0")
+                    {
+                        return new responseCodeResponse()
+                        {
+                            ResponseCode = "0"
+                        };
+                    }
+                    else if (result.Result == "2")
+                    {
+                        return new responseCodeResponse()
+                        {
+                            ResponseCode = "0"
+                        };
+                    }
+                    else if (result.Result == "8")
+                    {
+                        return new responseCodeResponse()
+                        {
+                            ResponseCode = "8"
+                        };
+                    }
+                    else
+                    {
+                        return new responseCodeResponse()
+                        {
+                            ResponseCode = "0"
+                        };
+                    }
+                }
+                else
+                {
+                    return new responseCodeResponse()
+                    {
+                        ResponseCode = "0"
+                    };
+                }
+
+            }
         }
 
         public customerProfileLoadResponse getCustomerProfileLoadRepo(customerProfileLoadRequest customerProfileLoadRequest)
         {
-            throw new System.NotImplementedException();
+            string connectionString = getConnectionName("localDBConnection");
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var customerProfileLoad = connection.QueryMultiple("[dbo].use_sp_cust_profile_load",
+                    new
+                    {
+                        customerProfileLoadRequest.mobileNo,
+                        customerProfileLoadRequest.sessionToken
+                    },
+                commandType: CommandType.StoredProcedure);
+
+                var result = customerProfileLoad.ReadSingleOrDefault<resultmodel>();
+
+                if (result.Result == "1")
+                {
+                    var profileModel = customerProfileLoad.Read<profileModel>();
+                    var addresses = customerProfileLoad.Read<addressModel>().ToList();
+
+                    var profileArray = profileModel.ToArray();
+
+                    var finResult = new customerProfileLoadResponse()
+                    {
+                        ResponseCode = "1",
+                        profile = profileArray[0],
+                        address = addresses.ToList()
+
+                    };
+
+                    return finResult;
+                }
+                else
+                {
+                    return new customerProfileLoadResponse()
+                    {
+                        ResponseCode = "0",
+                        profile = null,
+                        address = null
+                    };
+                }
+
+            }
         }
 
         public responseCodeResponse getUpdateNotificationRepo(notificationUpdateRequest notificationUpdateRequest)
         {
-            throw new System.NotImplementedException();
+            string connectionString = getConnectionName("localDBConnection");
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var result = connection.QuerySingleOrDefault("[dbo].use_sp_notification_update",
+                    new
+                    {
+                        notificationUpdateRequest.mobileNo,
+                        notificationUpdateRequest.readstatus,
+                        notificationUpdateRequest.sessionToken
+                    },
+                commandType: CommandType.StoredProcedure);
+
+                if (result != null)
+                {
+
+                    if (result.Result == "1")
+                    {
+
+                        return new responseCodeResponse()
+                        {
+                            ResponseCode = "1"
+                        };
+                    }
+                    else if (result.Result == "0")
+                    {
+                        return new responseCodeResponse()
+                        {
+                            ResponseCode = "0"
+                        };
+                    }
+                    else if (result.Result == "2")
+                    {
+                        return new responseCodeResponse()
+                        {
+                            ResponseCode = "0"
+                        };
+                    }
+                    else if (result.Result == "8")
+                    {
+                        return new responseCodeResponse()
+                        {
+                            ResponseCode = "8"
+                        };
+                    }
+                    else
+                    {
+                        return new responseCodeResponse()
+                        {
+                            ResponseCode = "0"
+                        };
+                    }
+                }
+                else
+                {
+                    return new responseCodeResponse()
+                    {
+                        ResponseCode = "0"
+                    };
+                }
+
+            }
         }
 
-        public responseCodeResponse getCustomerBookingRepo(bookingRequest bookingRequest)
+        public customerBookingResponse getCustomerBookingRepo(bookingRequest bookingRequest)
         {
-            throw new System.NotImplementedException();
+            string connectionString = getConnectionName("localDBConnection");
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                var bookingResult = connection.QueryMultiple("[dbo].use_sp_booking",
+                    new
+                    {
+                        bookingRequest.mobileNo,
+                        bookingRequest.sessionToken,
+                        bookingRequest.checkout
+                    },
+                commandType: CommandType.StoredProcedure);
+
+                var result = bookingResult.ReadSingleOrDefault<resultmodel>();
+
+                if (result != null)
+                {
+
+                    if (result.Result == "1")
+                    {
+                        var bookingID = bookingResult.ReadSingle<bookingID>();
+
+                        return new customerBookingResponse()
+                        {
+                            ResponseCode = "1",
+                            BookingId = bookingID.BookingId
+                        };
+                    }
+                    else if (result.Result == "0")
+                    {
+                        return new customerBookingResponse()
+                        {
+                            ResponseCode = "0",
+                            BookingId = null
+                        };
+                    }
+                    else if (result.Result == "2")
+                    {
+                        return new customerBookingResponse()
+                        {
+                            ResponseCode = "0",
+                            BookingId = null
+                        };
+                    }
+                    else if (result.Result == "8")
+                    {
+                        return new customerBookingResponse()
+                        {
+                            ResponseCode = "8",
+                            BookingId = null
+                        };
+                    }
+                    else
+                    {
+                        return new customerBookingResponse()
+                        {
+                            ResponseCode = "0",
+                            BookingId = null
+                        };
+                    }
+                }
+                else
+                {
+                    return new customerBookingResponse()
+                    {
+                        ResponseCode = "0",
+                        BookingId = null
+                    };
+                }
+
+            }
         }
     }
 }

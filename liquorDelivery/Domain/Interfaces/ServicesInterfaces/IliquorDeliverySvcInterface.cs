@@ -19,6 +19,6 @@ namespace Domain.Interfaces.ServicesInterfaces
         responseCodeResponse getCustomerProfileInsertSvc(customerProfileRequest customerProfileRequest);
         customerProfileLoadResponse getCustomerProfileLoadSvc(customerProfileLoadRequest customerProfileLoadRequest);
         responseCodeResponse getUpdateNotificationSvc(notificationUpdateRequest notificationUpdateRequest);
-        responseCodeResponse getCustomerBookingSvc(bookingRequest bookingRequest);
+        customerBookingResponse getCustomerBookingSvc(bookingRequest bookingRequest);
     }
 }

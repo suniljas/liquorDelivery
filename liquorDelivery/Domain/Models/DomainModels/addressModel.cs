@@ -6,10 +6,10 @@ namespace Domain.Models.DomainModels
 {
     public class addressModel
     {
-        public string add1 { get; set; }
-        public string add2 { get; set; }
-        public string city { get; set; }
-        public string state { get; set; }
-        public long pincode { get; set; }
+        public string Addline1 { get; set; }
+        public string Addline2 { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public long Pincode { get; set; }
     }
 }

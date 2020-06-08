@@ -97,22 +97,26 @@ namespace liquorDeliverySevices
 
         public responseCodeResponse getCustomerProfileInsertSvc(customerProfileRequest customerProfileRequest)
         {
-            throw new NotImplementedException();
+            var result = _liquorDeliveryRepo.getCustomerProfileInsertRepo(customerProfileRequest);
+            return result as responseCodeResponse;
         }
 
         public customerProfileLoadResponse getCustomerProfileLoadSvc(customerProfileLoadRequest customerProfileLoadRequest)
         {
-            throw new NotImplementedException();
+            var result = _liquorDeliveryRepo.getCustomerProfileLoadRepo(customerProfileLoadRequest);
+            return result as customerProfileLoadResponse;
         }
 
         public responseCodeResponse getUpdateNotificationSvc(notificationUpdateRequest notificationUpdateRequest)
         {
-            throw new NotImplementedException();
+            var result = _liquorDeliveryRepo.getUpdateNotificationRepo(notificationUpdateRequest);
+            return result as responseCodeResponse;
         }
 
-        public responseCodeResponse getCustomerBookingSvc(bookingRequest bookingRequest)
+        public customerBookingResponse getCustomerBookingSvc(bookingRequest bookingRequest)
         {
-            throw new NotImplementedException();
+            var result = _liquorDeliveryRepo.getCustomerBookingRepo(bookingRequest);
+            return result as customerBookingResponse;
         }
     }
 }
