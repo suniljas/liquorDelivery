@@ -5,7 +5,9 @@ using Domain.Models.DomainModels;
 using Domain.Models.RequestModels;
 using Domain.Models.ResponseModels;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -16,7 +18,7 @@ namespace liquorDeliveryRepository
     {
         private readonly IConfiguration _configuration;
         private readonly ImapperInterface _mapper;
-        public liquorDeliveryRepo(IConfiguration configuration , ImapperInterface mapper)
+        public liquorDeliveryRepo(IConfiguration configuration, ImapperInterface mapper)
         {
             _configuration = configuration;
             _mapper = mapper;
@@ -147,9 +149,9 @@ namespace liquorDeliveryRepository
                 if (result.Result == "1")
                 {
                     var cartCount = subCategoriesMenu.ReadSingle<cartCountValue>();
-                    var childCat = subCategoriesMenu.Read<childList>().ToList();                    
+                    var childCat = subCategoriesMenu.Read<childList>().ToList();
                     var qty = subCategoriesMenu.Read<quantityDetails>().ToList();
-                   
+
 
                     List<childMenuCategory> mapperListResponse = _mapper.MapChildAndQuantity(childCat.ToList(), qty.ToList());
 
@@ -292,22 +294,68 @@ namespace liquorDeliveryRepository
                 commandType: CommandType.StoredProcedure);
 
                 var result = loadCart.ReadSingleOrDefault<resultmodel>();
+
                 if (result != null)
                 {
 
                     if (result.Result == "1")
                     {
                         var cartCount = loadCart.ReadSingle<cartCountValue>();
-                        var loadCartInfo = loadCart.Read<CartInfo>().ToList();                        
+                        var loadCartInfo = loadCart.Read<CartInfo>().ToList();
+                        var otherCharges = loadCart.Read<otherCharges>();
+
+
+                        var otherChargesArray = otherCharges.ToArray();
+
 
                         var finResult = new loadCartResponse()
                         {
                             CartDetails = loadCartInfo.ToList(),
                             ResponseCode = "1",
-                            CartCount = cartCount.CartCount
+                            CartCount = cartCount.CartCount,
+                            DeliveryCharge = otherChargesArray[0].DeliveryCharge,
+                            TaxPer = otherChargesArray[0].TaxPer,
+                            ExtraCharge = otherChargesArray[0].ExtraCharge
+
                         };
 
                         return finResult;
+                    }
+                    else if (result.Result == "0")
+                    {
+                        return new loadCartResponse()
+                        {
+                            CartDetails = null,
+                            ResponseCode = "0",
+                            CartCount = null,
+                            DeliveryCharge = null,
+                            TaxPer = null,
+                            ExtraCharge = null
+                        };
+                    }
+                    else if (result.Result == "2")
+                    {
+                        return new loadCartResponse()
+                        {
+                            CartDetails = null,
+                            ResponseCode = "2",
+                            CartCount = null,
+                            DeliveryCharge = null,
+                            TaxPer = null,
+                            ExtraCharge = null
+                        };
+                    }
+                    else if (result.Result == "8")
+                    {
+                        return new loadCartResponse()
+                        {
+                            CartDetails = null,
+                            ResponseCode = "8",
+                            CartCount = null,
+                            DeliveryCharge = null,
+                            TaxPer = null,
+                            ExtraCharge = null
+                        };
                     }
                     else
                     {
@@ -315,7 +363,10 @@ namespace liquorDeliveryRepository
                         {
                             CartDetails = null,
                             ResponseCode = "0",
-                            CartCount = null
+                            CartCount = null,
+                            DeliveryCharge = null,
+                            TaxPer = null,
+                            ExtraCharge = null
                         };
                     }
                 }
@@ -325,7 +376,10 @@ namespace liquorDeliveryRepository
                     {
                         CartDetails = null,
                         ResponseCode = "0",
-                        CartCount = null
+                        CartCount = null,
+                        DeliveryCharge = null,
+                        TaxPer = null,
+                        ExtraCharge = null
                     };
                 }
 
@@ -411,8 +465,11 @@ namespace liquorDeliveryRepository
                     new
                     {
                         customerProfileRequest.mobileNo,
-                        customerProfileRequest.title,
-                        customerProfileRequest.name,
+                        customerProfileRequest.shipmobile,
+                        customerProfileRequest.firstname,
+                        customerProfileRequest.lastname,
+                        customerProfileRequest.iSDefault,
+                        customerProfileRequest.landmark,
                         customerProfileRequest.addline1,
                         customerProfileRequest.addline2,
                         customerProfileRequest.AddorUpdate,
@@ -421,7 +478,8 @@ namespace liquorDeliveryRepository
                         customerProfileRequest.email,
                         customerProfileRequest.pincode,
                         customerProfileRequest.sessionToken,
-                        customerProfileRequest.state
+                        customerProfileRequest.state,
+                        customerProfileRequest.nickname
                     },
                 commandType: CommandType.StoredProcedure);
 

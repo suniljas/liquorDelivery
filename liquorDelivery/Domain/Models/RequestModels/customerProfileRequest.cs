@@ -8,8 +8,10 @@ namespace Domain.Models.RequestModels
     {
 
         public long mobileNo { get; set; }
-        public string title { get; set; }
-        public string name { get; set; }
+        public long shipmobile { get; set; }
+        public string nickname { get; set; }
+        public string firstname { get; set; }
+        public string lastname { get; set; }
         public string email { get; set; }
         public string addline1 { get; set; }
         public string addline2 { get; set; }
@@ -19,6 +21,8 @@ namespace Domain.Models.RequestModels
         public long pincode { get; set; }
         public string addtype { get; set; }
         public string AddorUpdate { get; set; }
+        public int iSDefault { get; set; }
+        public string landmark { get; set; }
 
     }
 }
