@@ -1,10 +1,14 @@
 ﻿
+using Domain.Models.DomainModels;
+using System.Collections.Generic;
+
 namespace Domain.Models.ResponseModels
 {
     public class loginValidatorResponse
     {
-        public string ResponseCode { get; set; }
-        public string SessionToken { get; set; }
+        public string Result { get; set; }
+        public profileModel ProfileDetail { get; set; }
+        public List<addressModel> AddressDetails { get; set; }
     }
 }
 

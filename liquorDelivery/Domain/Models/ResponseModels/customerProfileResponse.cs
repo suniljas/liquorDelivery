@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Models.DomainModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 

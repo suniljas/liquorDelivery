@@ -43,8 +43,10 @@ namespace liquorDeliveryRepository
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                var loginvalidatorresponse = new loginValidatorResponse();
+
                 connection.Open();
-                var authResult = connection.QuerySingleOrDefault<userOtpAuthResponse>("[dbo].use_sp_logincall_validate",
+                var authResult = connection.QueryMultiple("[dbo].use_sp_logincall_validate",
                     new
                     {
                         userOtpAuthRequest.mobileNo,
@@ -57,22 +59,58 @@ namespace liquorDeliveryRepository
                     },
                 commandType: CommandType.StoredProcedure);
 
-                if (((authResult.Result == "0") || (authResult.Result == "8")))
-                {
-                    var loginvalidatorresponse = new loginValidatorResponse
-                    {
-                        ResponseCode = authResult.Result,
-                        SessionToken = null
-                    };
+                var result = authResult.ReadSingleOrDefault<resultmodel>();
 
-                    return loginvalidatorresponse;
+
+                if (result.Result != "0")
+                {
+                    var profileDetail = authResult.Read<profileModel>();
+                    var addressDetails = authResult.Read<addressModel>().ToList();
+
+                    var profileDetailArray = profileDetail.ToArray();
+
+                    if (profileDetail != null)
+                    {
+                        if ( addressDetails.Count > 0 )
+                        {
+                            loginvalidatorresponse = new loginValidatorResponse
+                            {
+                                Result = result.Result,
+                                ProfileDetail = profileDetailArray[0],
+                                AddressDetails = addressDetails
+                            };
+
+                            return loginvalidatorresponse;
+                        }
+                        else
+                        {
+                            loginvalidatorresponse = new loginValidatorResponse
+                            {
+                                Result = result.Result,
+                                ProfileDetail = null,
+                                AddressDetails = null
+                            };
+                            return loginvalidatorresponse;
+                        }
+                    }
+                    else
+                    {
+                        loginvalidatorresponse = new loginValidatorResponse
+                        {
+                            Result = result.Result,
+                            ProfileDetail = null,
+                            AddressDetails = null
+                        };
+                        return loginvalidatorresponse;
+                    }
                 }
                 else
                 {
-                    var loginvalidatorresponse = new loginValidatorResponse
+                    loginvalidatorresponse = new loginValidatorResponse
                     {
-                        ResponseCode = "1",
-                        SessionToken = authResult.Result
+                        Result = "0",
+                        ProfileDetail = null,
+                        AddressDetails = null
                     };
 
                     return loginvalidatorresponse;
