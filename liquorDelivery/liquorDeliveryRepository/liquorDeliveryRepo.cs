@@ -454,14 +454,14 @@ namespace liquorDeliveryRepository
             }
         }
 
-        public responseCodeResponse getCustomerProfileInsertRepo(customerProfileRequest customerProfileRequest)
+        public customerProfileResponse getCustomerProfileInsertRepo(customerProfileRequest customerProfileRequest)
         {
             string connectionString = getConnectionName("localDBConnection");
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var result = connection.QuerySingleOrDefault("[dbo].use_sp_cust_profile",
+                var resultResp = connection.QueryMultiple("[dbo].use_sp_cust_profile",
                     new
                     {
                         customerProfileRequest.mobileNo,
@@ -472,62 +472,70 @@ namespace liquorDeliveryRepository
                         customerProfileRequest.landmark,
                         customerProfileRequest.addline1,
                         customerProfileRequest.addline2,
-                        customerProfileRequest.AddorUpdate,
+                        customerProfileRequest.addorupddate,
                         customerProfileRequest.addtype,
                         customerProfileRequest.city,
                         customerProfileRequest.email,
                         customerProfileRequest.pincode,
                         customerProfileRequest.sessionToken,
-                        customerProfileRequest.state,
                         customerProfileRequest.nickname
                     },
                 commandType: CommandType.StoredProcedure);
 
+                var result = resultResp.ReadSingleOrDefault<resultmodel>();
+                
                 if (result != null)
                 {
 
                     if (result.Result == "1")
                     {
+                        var addressId = resultResp.ReadSingle<string>();
 
-                        return new responseCodeResponse()
+                        return new customerProfileResponse()
                         {
-                            ResponseCode = "1"
+                            ResponseCode = "1",
+                            AddressId = addressId.ToString()
                         };
                     }
                     else if (result.Result == "0")
                     {
-                        return new responseCodeResponse()
+                        return new customerProfileResponse()
                         {
-                            ResponseCode = "0"
+                            ResponseCode = "0",
+                            AddressId = null
                         };
                     }
                     else if (result.Result == "2")
                     {
-                        return new responseCodeResponse()
+                        return new customerProfileResponse()
                         {
-                            ResponseCode = "0"
+                            ResponseCode = "0",
+                            AddressId = null
                         };
                     }
                     else if (result.Result == "8")
                     {
-                        return new responseCodeResponse()
+                        return new customerProfileResponse()
                         {
-                            ResponseCode = "8"
+                            ResponseCode = "8",
+                            AddressId = null
                         };
                     }
                     else
                     {
-                        return new responseCodeResponse()
+                        return new customerProfileResponse()
                         {
-                            ResponseCode = "0"
+                            ResponseCode = "0",
+                            AddressId = null
                         };
                     }
                 }
                 else
                 {
-                    return new responseCodeResponse()
+                    return new customerProfileResponse()
                     {
-                        ResponseCode = "0"
+                        ResponseCode = "0",
+                        AddressId = null
                     };
                 }
 

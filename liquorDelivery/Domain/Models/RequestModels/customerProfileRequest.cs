@@ -17,10 +17,9 @@ namespace Domain.Models.RequestModels
         public string addline2 { get; set; }
         public string city { get; set; }
         public string sessionToken { get; set; }
-        public string state { get; set; }
         public long pincode { get; set; }
         public string addtype { get; set; }
-        public string AddorUpdate { get; set; }
+        public string addorupddate { get; set; }
         public int iSDefault { get; set; }
         public string landmark { get; set; }
 

@@ -16,7 +16,7 @@ namespace Domain.Interfaces.RepositoryInterfaces
         addCartResponse getAddCartRepo(addCartRequest addCartRequest);
         loadCartResponse getLoadCartRepo(loadCartRequest loadCartRequest);
         customerNotificationResponse getCustomerNotificationRepo(notificationRequest notificationRequest);
-        responseCodeResponse getCustomerProfileInsertRepo(customerProfileRequest customerProfileRequest);
+        customerProfileResponse getCustomerProfileInsertRepo(customerProfileRequest customerProfileRequest);
         customerProfileLoadResponse getCustomerProfileLoadRepo(customerProfileLoadRequest customerProfileLoadRequest);
         responseCodeResponse getUpdateNotificationRepo(notificationUpdateRequest notificationUpdateRequest);
         customerBookingResponse getCustomerBookingRepo(bookingRequest bookingRequest);

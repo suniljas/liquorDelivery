@@ -95,10 +95,10 @@ namespace liquorDeliverySevices
             return result as customerNotificationResponse;
         }
 
-        public responseCodeResponse getCustomerProfileInsertSvc(customerProfileRequest customerProfileRequest)
+        public customerProfileResponse getCustomerProfileInsertSvc(customerProfileRequest customerProfileRequest)
         {
             var result = _liquorDeliveryRepo.getCustomerProfileInsertRepo(customerProfileRequest);
-            return result as responseCodeResponse;
+            return result as customerProfileResponse;
         }
 
         public customerProfileLoadResponse getCustomerProfileLoadSvc(customerProfileLoadRequest customerProfileLoadRequest)
